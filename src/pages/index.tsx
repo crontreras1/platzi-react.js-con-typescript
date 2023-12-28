@@ -20,7 +20,7 @@ const Home: NextPage = () =>  {
       url:`https://randomfox.ca/images/${randomImg()}.jpg`
     }
 
-    setImages([newImageItem])
+    setImages([ ...images, newImageItem])
   }
 
   return (

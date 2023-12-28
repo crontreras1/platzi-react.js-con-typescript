@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 type Props = {
     image: string;
@@ -6,6 +6,24 @@ type Props = {
 
 export const RandomFox = ({ image }: Props): JSX.Element => {
     const node = useRef<HTMLImageElement>(null)
-    
-    return <img ref={ node } src={ image } className="w-96 h-auto"/>  
+
+    const [src, setSrc] = useState('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4=')
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setSrc(image)
+                }
+            })
+        })
+
+        if (node.current) {
+            observer.observe(node.current)
+        }
+
+        return () => {observer.disconnect()}
+    }, [image])
+
+    return <img ref={ node } src={ src } className="w-96 h-auto rounded-none bg-gray-300"/>  
 }
