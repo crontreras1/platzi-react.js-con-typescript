@@ -27,9 +27,9 @@ const Home: NextPage = () =>  {
     <main>
       <h2>Hola, mundillo ;)</h2>
       <button onClick={ addNewFox }>Add new fox</button>
-      { images.map((image) => (
-        <div key={ image.id } className=' w-screen flex flex-col items-center p-4'>
-          <RandomFox image={ image.url }/> 
+      { images.map(({ id, url }) => (
+        <div key={ id } className=' w-screen flex flex-col items-center p-4'>
+          <RandomFox src={ url }/> 
         </div>
       ))}
     </main>
