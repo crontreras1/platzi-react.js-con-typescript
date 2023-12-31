@@ -9,13 +9,11 @@ const randomImg = (): number => Math.floor(Math.random() * 122) + 1
 // Generate unique id
 const generateId = () => Math.random().toString(36).substr(2, 9)
 
-type imageItem = { id: string, url: string }
-
 const Home: NextPage = () =>  {
-  const [ images, setImages ] = useState<Array<imageItem>>([])
+  const [ images, setImages ] = useState<Array<IFoxImageItem>>([])
 
   const addNewFox: MouseEventHandler<HTMLButtonElement> = () => {
-    const newImageItem: imageItem = {
+    const newImageItem: IFoxImageItem = {
       id: generateId(), 
       url:`https://randomfox.ca/images/${randomImg()}.jpg`
     }
